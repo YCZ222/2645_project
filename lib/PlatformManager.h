@@ -10,8 +10,8 @@ public:
     void update(float dt);
     void draw(N5110 &lcd);
     void generate();
-    bool isOnPlatform(float x, float y, float velocity_y) const;  // 新增
-    float findPlatformY(float x) const;  // 新增
+    bool isOnPlatform(float x, float y, float velocity_y) const;  
+    float findPlatformY(float x) const;  
 
 private:
     static constexpr int MAX_PLATFORMS = 5;

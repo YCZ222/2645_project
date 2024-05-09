@@ -10,12 +10,16 @@ public:
     void update(float dt);
     void draw(N5110 &lcd);
     void generate();
+    static bool checkCollision(float x1, float y1, float width1, float height1,
+                               float x2, float y2, float width2, float height2);
+    bool checkPlayerCollision(float x, float y);
 
 private:
-    static constexpr int MAX_OBSTACLES = 2;
-    Obstacle obstacles[MAX_OBSTACLES];
+    static const int MAX_OBSTACLES = 7;  
+    SpaceJunk spaceJunks[2];
+    Bullet bullets[5];
+    int last_x = 81;
     int spawnCounter;
-    int last_x = 81; // Starting position for the first obstacle
 };
 
 #endif

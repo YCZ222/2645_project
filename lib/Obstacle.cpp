@@ -1,26 +1,24 @@
 #include "Obstacle.h"
 
-Obstacle::Obstacle() : _x(-1), _y(0), _width(0), _height(0), _active(false) {
-    // _x 设为 -1 表示初始时在屏幕外
-}
+// SpaceJunk methods
+SpaceJunk::SpaceJunk() : _x(0), _y(0), _width(0), _height(0), _active(false) {}
 
-
-Obstacle::Obstacle(float x, float y, float width, float height)
+SpaceJunk::SpaceJunk(float x, float y, float width, float height)
     : _x(x), _y(y), _width(width), _height(height), _active(false) {}
 
-void Obstacle::update(float dt) {
+void SpaceJunk::update(float dt) {
     if (_active) {
-        _x -= dt * 0.4;  // Assume some speed of movement
+        _x -= dt * 0.4 ;  // Adjust speed for Space Junk
     }
 }
 
-void Obstacle::draw(N5110 &lcd) {
+void SpaceJunk::draw(N5110 &lcd) {
     if (_active) {
         lcd.drawRect(_x, _y, _width, _height, FILL_BLACK);
     }
 }
 
-void Obstacle::activate(float x, float y, float width, float height) {
+void SpaceJunk::activate(float x, float y, float width, float height) {
     _x = x;
     _y = y;
     _width = width;
@@ -28,27 +26,48 @@ void Obstacle::activate(float x, float y, float width, float height) {
     _active = true;
 }
 
-void Obstacle::deactivate() {
+void SpaceJunk::deactivate() {
     _active = false;
 }
 
-float Obstacle::get_x() const {
-    return _x;
+float SpaceJunk::get_x() const { return _x; }
+float SpaceJunk::get_y() const { return _y; }
+float SpaceJunk::get_width() const { return _width; }
+float SpaceJunk::get_height() const { return _height; }
+bool SpaceJunk::is_active() const { return _active; }
+
+// Bullet methods
+Bullet::Bullet() : _x(0), _y(0), _width(0), _height(0), _active(false) {}
+
+Bullet::Bullet(float x, float y, float width, float height)
+    : _x(x), _y(y), _width(width), _height(height), _active(false) {}
+
+void Bullet::update(float dt) {
+    if (_active) {
+        _x -= dt * 0.8;  // Adjust speed for bullets
+    }
 }
 
-float Obstacle::get_y() const {
-    return _y;
+void Bullet::draw(N5110 &lcd) {
+    if (_active) {
+        lcd.drawRect(_x, _y, _width, _height, FILL_BLACK);
+    }
 }
 
-float Obstacle::get_width() const {
-    return _width;
+void Bullet::activate(float x, float y, float width, float height) {
+    _x = x;
+    _y = y;
+    _width = width;
+    _height = height;
+    _active = true;
 }
 
-bool Obstacle::is_active() const {
-    return _active;
+void Bullet::deactivate() {
+    _active = false;
 }
 
-float Obstacle::get_height() const {
-    return _height;
-}
-
+float Bullet::get_x() const { return _x; }
+float Bullet::get_y() const { return _y; }
+float Bullet::get_width() const { return _width; }
+float Bullet::get_height() const { return _height; }
+bool Bullet::is_active() const { return _active; }
